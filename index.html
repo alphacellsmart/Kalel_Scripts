@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalel Scripts</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple: #8b00ff;
+  --purple2: #6600cc;
+  --gold: #c9a84c;
+  --white: #f0eaf8;
+  --dim: #9080aa;
+  --bg: #07040f;
+  --card: rgba(18,8,30,0.9);
+  --border: rgba(139,0,255,0.3);
+}
+body { font-family:'Rajdhani',sans-serif; background:var(--bg); color:var(--white); min-height:100vh; overflow-x:hidden; }
+
+/* INTRO */
+#intro {
+  position:fixed; inset:0; z-index:999;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:#000; cursor:pointer; overflow:hidden;
+}
+.toji-bg {
+  position:absolute; inset:0;
+  background-image:url('toji.jpg');
+  background-size:cover; background-position:center top;
+  filter:brightness(0.42) saturate(1.4);
+  transition:filter 0.5s;
+}
+#intro:hover .toji-bg { filter:brightness(0.52) saturate(1.6); }
+.toji-bg-fallback {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 70% 90% at 50% 20%, rgba(139,0,255,0.35) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 70% at 20% 60%, rgba(80,0,180,0.25) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 80% 40%, rgba(120,0,220,0.2) 0%, transparent 50%),
+    linear-gradient(180deg, #0a0015 0%, #07040f 100%);
+}
+#intro::before {
+  content:''; position:absolute; inset:0; z-index:1;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(139,0,255,0.65) 0%, transparent 55%),
+    linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 55%);
+}
+#intro::after {
+  content:''; position:absolute; inset:0; z-index:1;
+  background:repeating-linear-gradient(90deg,transparent 0px,transparent 80px,rgba(139,0,255,0.03) 80px,rgba(139,0,255,0.03) 81px);
+  animation:flicker 4s infinite;
+}
+@keyframes flicker{0%,100%{opacity:1}92%{opacity:1}93%{opacity:0.3}94%{opacity:1}96%{opacity:0.5}97%{opacity:1}}
+
+.lightning { position:absolute; width:2px; background:linear-gradient(180deg,transparent,rgba(139,0,255,0.8),rgba(200,150,255,0.5),transparent); animation:lfx 3s infinite; z-index:2; }
+.lightning:nth-child(1){left:18%;height:40%;top:8%;animation-delay:0s;transform:rotate(6deg);}
+.lightning:nth-child(2){left:76%;height:38%;top:12%;animation-delay:1.3s;transform:rotate(-9deg);}
+.lightning:nth-child(3){left:44%;height:52%;top:4%;animation-delay:2.2s;transform:rotate(3deg);}
+@keyframes lfx{0%,84%,100%{opacity:0}85%{opacity:1}86%{opacity:0.2}87%{opacity:1}88%{opacity:0}}
+
+.intro-content { position:relative; z-index:3; text-align:center; padding:30px 24px; }
+.intro-logo { margin-bottom:18px; }
+.sukuna-svg { width:65px; height:65px; filter:drop-shadow(0 0 15px var(--purple)) drop-shadow(0 0 35px var(--purple2)); animation:pglow 2s ease-in-out infinite; }
+@keyframes pglow{0%,100%{filter:drop-shadow(0 0 10px var(--purple)) drop-shadow(0 0 25px var(--purple2));transform:scale(1)}50%{filter:drop-shadow(0 0 25px var(--purple)) drop-shadow(0 0 55px var(--purple2));transform:scale(1.07)}}
+
+.intro-title { font-family:'Orbitron',monospace; font-size:clamp(1.4em,6vw,2.4em); font-weight:900; background:linear-gradient(135deg,#fff 0%,#bf7fff 45%,var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:4px; line-height:1.2; margin-bottom:6px; }
+.intro-sub { font-size:0.78em; letter-spacing:5px; color:var(--dim); text-transform:uppercase; margin-bottom:44px; }
+.tap-btn { display:inline-flex; align-items:center; gap:12px; padding:15px 34px; background:rgba(139,0,255,0.12); border:1px solid rgba(139,0,255,0.6); border-radius:50px; font-family:'Orbitron',monospace; font-size:0.72em; font-weight:700; letter-spacing:3px; color:var(--white); text-transform:uppercase; animation:tapglow 2s ease-in-out infinite; }
+@keyframes tapglow{0%,100%{box-shadow:0 0 15px rgba(139,0,255,0.3)}50%{box-shadow:0 0 40px rgba(139,0,255,0.65),0 0 80px rgba(139,0,255,0.2)}}
+.tap-icon { animation:bounce 1.5s ease-in-out infinite; }
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+#intro.exit { animation:iexit 0.8s ease-in forwards; }
+@keyframes iexit{0%{opacity:1;transform:scale(1);filter:brightness(1)}40%{opacity:1;transform:scale(1.02);filter:brightness(2.5)}70%{opacity:1;transform:scale(1.05);filter:brightness(6) saturate(2)}100%{opacity:0;transform:scale(1.08);pointer-events:none}}
+
+/* MAIN */
+#main { display:none; min-height:100vh; position:relative; }
+#main.visible { display:block; }
+.bg-layer { position:fixed; inset:0; z-index:0; background-image:url('toji.jpg'); background-size:cover; background-position:center top; filter:brightness(0.11) saturate(0.6) blur(5px); }
+.bg-overlay { position:fixed; inset:0; z-index:1; background:radial-gradient(ellipse 100% 50% at 50% 100%,rgba(139,0,255,0.18) 0%,transparent 60%),rgba(7,4,15,0.9); }
+.scan { position:fixed; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(139,0,255,0.35),transparent); animation:scanmv 7s linear infinite; z-index:2; pointer-events:none; }
+@keyframes scanmv{0%{top:-5%}100%{top:105%}}
+.glow-bar { height:2px; background:linear-gradient(90deg,transparent,var(--purple),var(--gold),var(--purple),transparent); box-shadow:0 0 15px var(--purple); position:relative; z-index:10; }
+
+.page-content { position:relative; z-index:10; max-width:480px; margin:0 auto; padding:0 16px 40px; }
+
+.page-header { padding:28px 0 18px; text-align:center; }
+.header-thumb { width:90px; height:90px; border-radius:50%; margin:0 auto 14px; border:2px solid var(--purple); box-shadow:0 0 25px rgba(139,0,255,0.5),0 0 50px rgba(139,0,255,0.2); overflow:hidden; background:linear-gradient(135deg,#2a0050,#1a0030); display:flex; align-items:center; justify-content:center; }
+.header-thumb img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+.fallback-icon { display:none; font-size:2.5em; color:var(--purple); }
+
+.page-title { font-family:'Orbitron',monospace; font-size:clamp(1em,4vw,1.5em); font-weight:900; background:linear-gradient(135deg,#fff,#bf7fff,var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:3px; text-transform:uppercase; }
+.page-sub { font-size:0.75em; color:var(--dim); letter-spacing:3px; text-transform:uppercase; margin-top:4px; }
+.page-desc { font-size:0.88em; color:#b090cc; margin-top:10px; line-height:1.6; }
+
+.divider { display:flex; align-items:center; gap:10px; margin:18px 0; }
+.div-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); }
+.div-gem { width:7px; height:7px; background:var(--purple); transform:rotate(45deg); box-shadow:0 0 10px var(--purple); }
+
+.sec-label { font-family:'Orbitron',monospace; font-size:0.58em; letter-spacing:3px; color:var(--purple); text-transform:uppercase; text-align:center; margin-bottom:14px; }
+
+.task { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 16px; margin-bottom:10px; display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit; transition:all 0.3s; position:relative; overflow:hidden; backdrop-filter:blur(10px); }
+.task::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--purple); box-shadow:0 0 10px var(--purple); }
+.task:hover { border-color:rgba(139,0,255,0.6); background:rgba(139,0,255,0.08); transform:translateX(4px); }
+.task.done { border-color:rgba(0,200,100,0.4); background:rgba(0,200,100,0.05); }
+.task.done::before { background:#00c864; box-shadow:0 0 8px #00c864; }
+
+.task-ico { width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3em; flex-shrink:0; transition:all 0.3s; }
+.task-txt { flex:1; }
+.task-name { font-family:'Rajdhani',sans-serif; font-size:1em; font-weight:700; letter-spacing:0.5px; }
+.task-hint { font-size:0.78em; color:var(--dim); margin-top:2px; }
+.task-arr { font-size:1em; transition:all 0.3s; }
+.task:hover .task-arr { transform:translateX(3px); }
+
+.progress-box { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; margin:14px 0; backdrop-filter:blur(8px); }
+.progress-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.progress-label { font-family:'Orbitron',monospace; font-size:0.58em; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.progress-count { font-family:'Orbitron',monospace; font-size:0.85em; color:var(--purple); }
+.progress-track { height:6px; background:rgba(139,0,255,0.1); border-radius:3px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(--purple2),var(--purple),#bf7fff); border-radius:3px; width:0%; transition:width 0.6s cubic-bezier(0.34,1.56,0.64,1); box-shadow:0 0 12px rgba(139,0,255,0.6); }
+
+.unlock-btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:16px; border:none; border-radius:14px; font-family:'Orbitron',monospace; font-size:0.72em; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; text-decoration:none; margin-top:4px; }
+.unlock-btn.locked { background:rgba(40,20,60,0.6); color:var(--dim); border:1px solid rgba(139,0,255,0.15); pointer-events:none; }
+.unlock-btn.unlocked { background:linear-gradient(135deg,var(--purple2),var(--purple)); color:white; pointer-events:all; animation:unlockglow 2s ease-in-out infinite; }
+@keyframes unlockglow{0%,100%{box-shadow:0 4px 20px rgba(139,0,255,0.4)}50%{box-shadow:0 4px 45px rgba(139,0,255,0.75),0 0 70px rgba(139,0,255,0.2)}}
+.unlock-btn.unlocked:hover { transform:translateY(-2px); filter:brightness(1.1); }
+
+footer { text-align:center; padding:20px; color:var(--dim); font-size:0.75em; letter-spacing:1px; position:relative; z-index:10; border-top:1px solid var(--border); }
+footer span { color:var(--purple); }
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.au{animation:fadeUp 0.5s ease forwards;opacity:0;}
+.d1{animation-delay:0.1s}.d2{animation-delay:0.2s}.d3{animation-delay:0.3s}.d4{animation-delay:0.4s}.d5{animation-delay:0.5s}.d6{animation-delay:0.6s}
+</style>
+</head>
+<body>
+
+<audio id="ryoiki" preload="auto">
+  <source src="https://www.myinstants.com/media/sounds/gojo-domain-expansion.mp3" type="audio/mpeg">
+</audio>
+
+<!-- INTRO -->
+<div id="intro" onclick="enterSite()">
+  <div class="toji-bg-fallback"></div>
+  <div class="toji-bg"></div>
+  <div class="lightning"></div>
+  <div class="lightning"></div>
+  <div class="lightning"></div>
+  <div class="intro-content">
+    <div class="intro-logo">
+      <svg class="sukuna-svg" viewBox="0 0 100 100" fill="none">
+        <path d="M50 55 L18 85 L22 70 L10 45 L28 60 Z" fill="#8b00ff"/>
+        <path d="M50 55 L82 85 L78 70 L90 45 L72 60 Z" fill="#8b00ff"/>
+        <path d="M42 55 L50 82 L58 55 L50 48 Z" fill="#8b00ff"/>
+        <ellipse cx="50" cy="50" rx="10" ry="12" fill="#bf7fff" opacity="0.5"/>
+        <circle cx="50" cy="50" r="14" fill="none" stroke="#8b00ff" stroke-width="1" opacity="0.4"/>
+      </svg>
+    </div>
+    <h1 class="intro-title">KALEL SCRIPTS</h1>
+    <p class="intro-sub">Scripts &amp; Executores Mobile</p>
+    <div class="tap-btn">
+      👆
+      TOQUE PARA ENTRAR
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <div class="bg-layer"></div>
+  <div class="bg-overlay"></div>
+  <div class="scan"></div>
+  <div class="glow-bar"></div>
+
+  <div class="page-content">
+    <div class="page-header au d1">
+      <div class="header-thumb">
+        <img src="toji.jpg" alt="Kalel Scripts"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        🐉
+      </div>
+      <h1 class="page-title">KALEL SCRIPTS</h1>
+      <p class="page-sub">Scripts &amp; Executores Mobile</p>
+      <p class="page-desc">Complete as missões abaixo para acessar os melhores scripts e executores mobile atualizados!</p>
+    </div>
+
+    <div class="divider au d2"><div class="div-line"></div><div class="div-gem"></div><div class="div-line"></div></div>
+
+    <p class="sec-label au d2">⚡ &nbsp;Complete as missões</p>
+
+    <a href="https://youtube.com/@kalel-scripts" target="_blank" class="task au d3" id="t1" onclick="completeTask('t1')">
+      <div class="task-ico" style="background:rgba(139,0,255,0.15);border:1px solid rgba(139,0,255,0.4);">
+        ▶
+      </div>
+      <div class="task-txt">
+        <div class="task-name">Se inscrever no Canal</div>
+        <div class="task-hint">youtube.com/@kalel-scripts</div>
+      </div>
+      <div class="task-arr" style="color:var(--purple);">→</div>
+    </a>
+
+    <a href="https://youtube.com/@kalel-scripts" target="_blank" class="task au d4" id="t2" onclick="completeTask('t2')">
+      <div class="task-ico" style="background:rgba(139,0,255,0.15);border:1px solid rgba(139,0,255,0.4);">
+        ▶
+      </div>
+      <div class="task-txt">
+        <div class="task-name">Curtir o último vídeo</div>
+        <div class="task-hint">Assista e deixe seu like!</div>
+      </div>
+      <div class="task-arr" style="color:var(--purple);">→</div>
+    </a>
+
+    <a href="https://instagram.com/kalel_scripts" target="_blank" class="task au d5" id="t3" onclick="completeTask('t3')">
+      <div class="task-ico" style="background:rgba(139,0,255,0.15);border:1px solid rgba(139,0,255,0.4);">
+        📸
+      </div>
+      <div class="task-txt">
+        <div class="task-name">Seguir no Instagram</div>
+        <div class="task-hint">@kalel_scripts</div>
+      </div>
+      <div class="task-arr" style="color:var(--purple);">→</div>
+    </a>
+
+    <div class="progress-box au d5">
+      <div class="progress-top">
+        <span class="progress-label">🛡 &nbsp;Progresso</span>
+        <span class="progress-count" id="prog-count">0 / 3</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="prog-fill"></div>
+      </div>
+    </div>
+
+    <a href="downloads.html" class="unlock-btn locked au d6" id="unlock-btn">
+      🔒 &nbsp;LINK BLOQUEADO
+    </a>
+  </div>
+
+  <footer><p>© 2026 <span>Kalel Scripts</span> — Todos os direitos reservados</p></footer>
+</div>
+
+<script>
+function enterSite() {
+  document.getElementById('ryoiki').volume = 0.75;
+  document.getElementById('ryoiki').play().catch(()=>{});
+  document.getElementById('intro').classList.add('exit');
+  setTimeout(()=>{
+    document.getElementById('intro').style.display='none';
+    document.getElementById('main').classList.add('visible');
+  }, 750);
+}
+
+let done={t1:false,t2:false,t3:false};
+
+function completeTask(id){
+  setTimeout(()=>{
+    if(!done[id]){
+      done[id]=true;
+      document.getElementById(id).classList.add('done');
+      document.querySelector('#'+id+' .task-arr').innerHTML='✓';
+      updateProgress();
+    }
+  },1500);
+}
+
+function updateProgress(){
+  const c=Object.values(done).filter(Boolean).length;
+  document.getElementById('prog-fill').style.width=(c/3*100)+'%';
+  document.getElementById('prog-count').textContent=c+' / 3';
+  if(c===3){
+    const b=document.getElementById('unlock-btn');
+    b.classList.remove('locked');
+    b.classList.add('unlocked');
+    b.innerHTML='✅ &nbsp;ACESSAR DOWNLOADS';
+  }
+}
+</script>
+</body>
+</html>
