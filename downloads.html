@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalel Scripts — Downloads</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple: #8b00ff;
+  --purple2: #6600cc;
+  --gold: #c9a84c;
+  --white: #f0eaf8;
+  --dim: #9080aa;
+  --bg: #07040f;
+  --card: rgba(18,8,30,0.92);
+  --border: rgba(139,0,255,0.25);
+}
+body { font-family:'Rajdhani',sans-serif; background:var(--bg); color:var(--white); min-height:100vh; overflow-x:hidden; }
+
+.bg-fixed { position:fixed; inset:0; z-index:0; background-image:url('Toji.jpg'); background-size:cover; background-position:center top; filter:brightness(0.08) saturate(0.5) blur(8px); }
+.bg-overlay { position:fixed; inset:0; z-index:1; background:radial-gradient(ellipse 80% 40% at 50% 0%,rgba(139,0,255,0.12) 0%,transparent 60%),rgba(7,4,15,0.92); }
+.scan { position:fixed; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(139,0,255,0.3),transparent); animation:scanmv 8s linear infinite; z-index:2; pointer-events:none; }
+@keyframes scanmv{0%{top:-5%}100%{top:105%}}
+.glow-bar { height:2px; position:relative; z-index:10; background:linear-gradient(90deg,transparent,var(--purple),var(--gold),var(--purple),transparent); box-shadow:0 0 15px var(--purple); }
+
+.content { position:relative; z-index:10; max-width:500px; margin:0 auto; padding:0 16px 50px; }
+
+/* HEADER */
+.header { padding:24px 0 16px; text-align:center; }
+.back-btn { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; background:rgba(139,0,255,0.1); border:1px solid var(--border); border-radius:20px; color:var(--dim); font-size:0.8em; letter-spacing:1px; text-decoration:none; transition:all 0.3s; margin-bottom:16px; }
+.back-btn:hover { color:var(--white); border-color:var(--purple); }
+.sukuna-svg { width:46px; height:46px; filter:drop-shadow(0 0 10px var(--purple)); animation:pglow 3s ease-in-out infinite; margin:0 auto 10px; display:block; }
+@keyframes pglow{0%,100%{filter:drop-shadow(0 0 8px var(--purple))}50%{filter:drop-shadow(0 0 20px var(--purple))}}
+.page-title { font-family:'Orbitron',monospace; font-size:clamp(1em,4vw,1.4em); font-weight:900; background:linear-gradient(135deg,#fff,#bf7fff,var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:3px; text-transform:uppercase; }
+.page-sub { font-size:0.75em; color:var(--dim); letter-spacing:3px; text-transform:uppercase; margin-top:4px; }
+
+/* SEARCH */
+.search-wrap { position:relative; margin:16px 0; }
+.search-box { width:100%; padding:13px 18px 13px 42px; background:var(--card); border:1px solid var(--border); border-radius:12px; color:var(--white); font-family:'Rajdhani',sans-serif; font-size:0.95em; outline:none; transition:all 0.3s; backdrop-filter:blur(10px); }
+.search-box::placeholder { color:var(--dim); }
+.search-box:focus { border-color:var(--purple); box-shadow:0 0 20px rgba(139,0,255,0.2); }
+.search-ico { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--dim); }
+
+/* DIVIDER */
+.divider { display:flex; align-items:center; gap:10px; margin:20px 0 14px; }
+.div-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); }
+.div-gem { width:7px; height:7px; background:var(--purple); transform:rotate(45deg); box-shadow:0 0 10px var(--purple); }
+.sec-label { font-family:'Orbitron',monospace; font-size:0.58em; letter-spacing:3px; color:var(--purple); text-transform:uppercase; margin-bottom:12px; }
+
+/* ===== CYRUS HUB — DESTAQUE ===== */
+.cyrus-wrap { margin-bottom:8px; }
+
+.cyrus-label {
+  text-align:center; font-family:'Orbitron',monospace;
+  font-size:0.55em; letter-spacing:4px; color:var(--gold);
+  text-transform:uppercase; margin-bottom:10px;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.cyrus-label::before, .cyrus-label::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);
+}
+
+.cyrus-btn {
+  display:flex; align-items:center; gap:0;
+  width:100%; border-radius:16px; overflow:hidden;
+  text-decoration:none; border:1px solid rgba(139,0,255,0.5);
+  box-shadow:0 0 30px rgba(139,0,255,0.25), 0 0 60px rgba(139,0,255,0.1);
+  position:relative; transition:all 0.3s;
+  animation:cyrus-pulse 3s ease-in-out infinite;
+}
+@keyframes cyrus-pulse {
+  0%,100%{box-shadow:0 0 20px rgba(139,0,255,0.3),0 0 50px rgba(139,0,255,0.1)}
+  50%{box-shadow:0 0 40px rgba(139,0,255,0.55),0 0 80px rgba(139,0,255,0.2)}
+}
+.cyrus-btn:hover { transform:translateY(-2px); filter:brightness(1.08); }
+
+/* BARRA DE PROGRESSO DECORATIVA */
+.cyrus-progress {
+  position:absolute; bottom:0; left:0; right:0; height:3px;
+  background:rgba(139,0,255,0.2);
+}
+.cyrus-progress-fill {
+  height:100%;
+  background:linear-gradient(90deg, var(--purple2), var(--purple), #bf7fff, var(--gold));
+  animation:progress-run 2.5s ease-in-out infinite;
+  border-radius:0 2px 2px 0;
+}
+@keyframes progress-run {
+  0%{width:0%;opacity:1}
+  80%{width:100%;opacity:1}
+  100%{width:100%;opacity:0}
+}
+
+.cyrus-left {
+  background:linear-gradient(135deg, #1a0035, #2a0055);
+  padding:18px 16px;
+  display:flex; align-items:center; justify-content:center;
+  min-width:64px;
+}
+.cyrus-icon { font-size:1.8em; }
+
+.cyrus-center { flex:1; padding:16px 14px; background:linear-gradient(135deg, rgba(30,5,60,0.95), rgba(20,5,45,0.98)); }
+.cyrus-name { font-family:'Orbitron',monospace; font-size:1em; font-weight:900; color:var(--white); letter-spacing:2px; }
+.cyrus-desc { font-size:0.78em; color:#bf7fff; margin-top:3px; }
+.cyrus-tags { display:flex; gap:5px; margin-top:8px; flex-wrap:wrap; }
+.ctag { padding:3px 9px; border-radius:20px; font-size:0.62em; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; }
+.ctag-gold { background:rgba(201,168,76,0.15); color:var(--gold); border:1px solid rgba(201,168,76,0.3); }
+.ctag-green { background:rgba(0,200,100,0.12); color:#00c864; border:1px solid rgba(0,200,100,0.25); }
+.ctag-purple { background:rgba(139,0,255,0.15); color:#bf7fff; border:1px solid rgba(139,0,255,0.3); }
+
+.cyrus-right {
+  background:linear-gradient(135deg, var(--purple2), var(--purple));
+  padding:0 18px;
+  display:flex; align-items:center; justify-content:center;
+  min-width:64px; min-height:80px;
+}
+.cyrus-arrow { font-family:'Orbitron',monospace; font-size:0.65em; font-weight:900; color:white; letter-spacing:1px; text-transform:uppercase; writing-mode:vertical-lr; text-orientation:mixed; }
+
+/* ===== EXECUTOR CARDS ===== */
+.executor-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 16px; display:flex; align-items:center; gap:14px; backdrop-filter:blur(10px); transition:all 0.3s; position:relative; overflow:hidden; margin-bottom:10px; }
+.executor-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--purple); box-shadow:0 0 8px var(--purple); }
+.executor-card:hover { border-color:rgba(139,0,255,0.5); background:rgba(139,0,255,0.07); transform:translateX(3px); }
+
+.exec-ico { width:48px; height:48px; border-radius:12px; flex-shrink:0; background:rgba(139,0,255,0.15); border:1px solid rgba(139,0,255,0.3); display:flex; align-items:center; justify-content:center; font-size:1.5em; }
+
+.executor-info { flex:1; }
+.executor-name { font-family:'Orbitron',monospace; font-size:0.82em; font-weight:700; letter-spacing:1px; color:var(--white); }
+.executor-desc { font-size:0.75em; color:var(--dim); margin-top:3px; }
+.executor-tags { display:flex; gap:5px; margin-top:6px; flex-wrap:wrap; }
+.tag { padding:2px 8px; border-radius:20px; font-size:0.62em; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; }
+.tag-green { background:rgba(0,200,100,0.12); color:#00c864; border:1px solid rgba(0,200,100,0.25); }
+.tag-purple { background:rgba(139,0,255,0.12); color:#bf7fff; border:1px solid rgba(139,0,255,0.25); }
+.tag-gold { background:rgba(201,168,76,0.12); color:var(--gold); border:1px solid rgba(201,168,76,0.25); }
+
+.dl-btn { padding:10px 14px; background:linear-gradient(135deg,var(--purple2),var(--purple)); color:white; border:none; border-radius:10px; font-family:'Orbitron',monospace; font-size:0.6em; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-decoration:none; cursor:pointer; transition:all 0.3s; white-space:nowrap; flex-shrink:0; box-shadow:0 3px 12px rgba(139,0,255,0.3); }
+.dl-btn:hover { box-shadow:0 5px 20px rgba(139,0,255,0.5); filter:brightness(1.1); transform:translateY(-1px); }
+
+/* ===== GAME SECTIONS ===== */
+.game-section { margin-bottom:16px; }
+.game-header { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:16px; border-radius:12px 12px 0 0; background:linear-gradient(135deg,rgba(139,0,255,0.18),rgba(80,0,160,0.12)); border:1px solid rgba(139,0,255,0.4); border-bottom:none; text-align:center; }
+.game-emoji { font-size:1.1em; color:var(--purple); }
+.game-name-txt { font-family:'Orbitron',monospace; font-size:1em; font-weight:900; letter-spacing:3px; color:var(--white); text-shadow:0 0 15px rgba(139,0,255,0.6); text-transform:uppercase; }
+.game-count { font-size:0.65em; color:var(--purple); letter-spacing:2px; margin-left:0; }
+
+.script-item { background:var(--card); border:1px solid var(--border); border-top:none; padding:13px 16px; display:flex; align-items:center; gap:12px; backdrop-filter:blur(10px); transition:all 0.3s; }
+.script-item:last-child { border-radius:0 0 12px 12px; }
+.script-item:hover { background:rgba(139,0,255,0.06); }
+.script-item::before { content:''; width:2px; height:28px; flex-shrink:0; background:var(--purple); border-radius:2px; opacity:0.5; }
+.script-info { flex:1; }
+.script-name { font-size:0.9em; font-weight:700; color:var(--white); }
+.script-feat { font-size:0.7em; color:var(--dim); margin-top:3px; }
+.get-btn { padding:8px 14px; background:linear-gradient(135deg,var(--purple2),var(--purple)); color:white; border:none; border-radius:8px; font-family:'Orbitron',monospace; font-size:0.58em; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-decoration:none; cursor:pointer; transition:all 0.3s; white-space:nowrap; flex-shrink:0; }
+.get-btn:hover { box-shadow:0 4px 15px rgba(139,0,255,0.5); filter:brightness(1.15); transform:translateY(-1px); }
+
+footer { text-align:center; padding:24px 20px; color:var(--dim); font-size:0.75em; letter-spacing:1px; position:relative; z-index:10; border-top:1px solid var(--border); }
+footer span { color:var(--purple); }
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.au{animation:fadeUp 0.5s ease forwards;opacity:0;}
+.d1{animation-delay:0.05s}.d2{animation-delay:0.1s}.d3{animation-delay:0.15s}
+.d4{animation-delay:0.2s}.d5{animation-delay:0.25s}.d6{animation-delay:0.3s}
+.d7{animation-delay:0.35s}.d8{animation-delay:0.4s}
+
+/* BIG TITLES */
+.big-title {
+  display:flex; align-items:center; gap:14px;
+  margin:8px 0 16px;
+}
+.big-title-line {
+  flex:1; height:1px;
+  background:linear-gradient(90deg,transparent,var(--purple),transparent);
+}
+.big-title-txt {
+  font-family:"Orbitron",monospace;
+  font-size:clamp(1.1em,5vw,1.6em);
+  font-weight:900;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  background:linear-gradient(135deg,#fff,#bf7fff,var(--gold));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  text-shadow:none;
+  white-space:nowrap;
+}
+</style>
+</head>
+<body>
+<div class="bg-fixed"></div>
+<div class="bg-overlay"></div>
+<div class="scan"></div>
+<div class="glow-bar"></div>
+
+<div class="content">
+
+  <!-- HEADER -->
+  <div class="header">
+    <a href="index.html" class="back-btn au d1">← Voltar</a>
+    <svg class="sukuna-svg au d1" viewBox="0 0 100 100" fill="none">
+      <path d="M50 55 L18 85 L22 70 L10 45 L28 60 Z" fill="#8b00ff"/>
+      <path d="M50 55 L82 85 L78 70 L90 45 L72 60 Z" fill="#8b00ff"/>
+      <path d="M42 55 L50 82 L58 55 L50 48 Z" fill="#8b00ff"/>
+      <ellipse cx="50" cy="50" rx="10" ry="12" fill="#bf7fff" opacity="0.5"/>
+    </svg>
+    <h1 class="page-title au d2">Downloads</h1>
+    <p class="page-sub au d2">Scripts & Executores Mobile</p>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap au d3">
+    <span class="search-ico">🔍</span>
+    <input type="text" class="search-box" id="searchBox" placeholder="Pesquise por jogo ou script..." oninput="filterAll(this.value)">
+  </div>
+
+  <!-- ===== EXECUTORES ===== -->
+  <div class="divider au d4"><div class="div-line"></div><div class="div-gem"></div><div class="div-line"></div></div>
+  <div class="big-title au d4">
+  <span class="big-title-line"></span>
+  <h2 class="big-title-txt">EXECUTORES</h2>
+  <span class="big-title-line"></span>
+</div>
+
+  <div id="executores">
+
+    <!-- DELTA -->
+    <div class="executor-card au d5" data-search="delta executor mobile">
+      <div class="exec-ico">▶</div>
+      <div class="executor-info">
+        <div class="executor-name">Delta Executor</div>
+        <div class="executor-desc">O melhor executor mobile de 2026</div>
+        <div class="executor-tags">
+          <span class="tag tag-green">✓ Anti-Ban</span>
+          <span class="tag tag-gold">⭐ Top 1</span>
+          <span class="tag tag-purple">Mobile</span>
+        </div>
+      </div>
+      <a href="#" class="dl-btn">⬇ BAIXAR</a>
+    </div>
+
+    <!-- ARCEUS X -->
+    <div class="executor-card au d5" data-search="arceus x executor mobile">
+      <div class="exec-ico">▶</div>
+      <div class="executor-info">
+        <div class="executor-name">Arceus X</div>
+        <div class="executor-desc">Executor clássico e confiável</div>
+        <div class="executor-tags">
+          <span class="tag tag-green">✓ Estável</span>
+          <span class="tag tag-purple">Mobile</span>
+        </div>
+      </div>
+      <a href="#" class="dl-btn">⬇ BAIXAR</a>
+    </div>
+
+    <!-- FLUXUS -->
+    <div class="executor-card au d6" data-search="fluxus executor mobile">
+      <div class="exec-ico">▶</div>
+      <div class="executor-info">
+        <div class="executor-name">Fluxus</div>
+        <div class="executor-desc">Leve e rápido para qualquer device</div>
+        <div class="executor-tags">
+          <span class="tag tag-green">✓ Gratuito</span>
+          <span class="tag tag-purple">Mobile</span>
+        </div>
+      </div>
+      <a href="#" class="dl-btn">⬇ BAIXAR</a>
+    </div>
+
+    <!-- HYDROGEN -->
+    <div class="executor-card au d6" data-search="hydrogen executor mobile">
+      <div class="exec-ico">▶</div>
+      <div class="executor-info">
+        <div class="executor-name">Hydrogen</div>
+        <div class="executor-desc">Compatível com a maioria dos scripts</div>
+        <div class="executor-tags">
+          <span class="tag tag-green">✓ Compatível</span>
+          <span class="tag tag-purple">Mobile</span>
+        </div>
+      </div>
+      <a href="#" class="dl-btn">⬇ BAIXAR</a>
+    </div>
+
+    <!-- CRYPTIC -->
+    <div class="executor-card au d7" data-search="cryptic executor mobile">
+      <div class="exec-ico">▶</div>
+      <div class="executor-info">
+        <div class="executor-name">Cryptic</div>
+        <div class="executor-desc">Anti-Ban e seguro para mobile</div>
+        <div class="executor-tags">
+          <span class="tag tag-green">✓ Anti-Ban</span>
+          <span class="tag tag-purple">Mobile</span>
+        </div>
+      </div>
+      <a href="#" class="dl-btn">⬇ BAIXAR</a>
+    </div>
+
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <div class="divider"><div class="div-line"></div><div class="div-gem"></div><div class="div-line"></div></div>
+  <div class="big-title">
+  <span class="big-title-line"></span>
+  <h2 class="big-title-txt">SCRIPTS</h2>
+  <span class="big-title-line"></span>
+</div>
+
+  <div id="scripts-list">
+
+    <!-- BLOX FRUITS -->
+    <!-- COMO ADICIONAR SCRIPT: copie um bloco script-item e cole abaixo do último do mesmo jogo, trocando nome, features e href -->
+    <div class="game-section au d4" data-game="blox fruits">
+      <div class="game-header">
+        <span class="game-emoji">▶</span>
+        <span class="game-name-txt">Blox Fruits</span>
+        <span class="game-count">2 scripts</span>
+      </div>
+      <div class="script-item">
+        <div class="script-info">
+          <div class="script-name">Cyrus Hub</div>
+          <div class="script-feat">Auto Farm • Auto Quest • ESP • God Mode</div>
+        </div>
+        <a href="#" class="get-btn">▶ GET</a>
+      </div>
+      <div class="script-item">
+        <div class="script-info">
+          <div class="script-name">Auto Farm Script</div>
+          <div class="script-feat">Auto Farm • Teleport • Kill Aura</div>
+        </div>
+        <a href="#" class="get-btn">▶ GET</a>
+      </div>
+    </div>
+
+    <!-- KING LEGACY -->
+    <div class="game-section au d5" data-game="king legacy">
+      <div class="game-header">
+        <span class="game-emoji">▶</span>
+        <span class="game-name-txt">King Legacy</span>
+        <span class="game-count">1 script</span>
+      </div>
+      <div class="script-item">
+        <div class="script-info">
+          <div class="script-name">King Legacy Hub</div>
+          <div class="script-feat">Auto Farm • Teleport • ESP • Raid Auto</div>
+        </div>
+        <a href="#" class="get-btn">▶ GET</a>
+      </div>
+    </div>
+
+    <!-- JUJUTSU SHENANIGANS -->
+    <div class="game-section au d6" data-game="jujutsu shenanigans">
+      <div class="game-header">
+        <span class="game-emoji">▶</span>
+        <span class="game-name-txt">Jujutsu Shenanigans</span>
+        <span class="game-count">1 script</span>
+      </div>
+      <div class="script-item">
+        <div class="script-info">
+          <div class="script-name">JJS Hub</div>
+          <div class="script-feat">Auto Farm • Kill Aura • ESP • Speed</div>
+        </div>
+        <a href="#" class="get-btn">▶ GET</a>
+      </div>
+    </div>
+
+    <!-- BROOKHAVEN -->
+    <div class="game-section au d7" data-game="brookhaven">
+      <div class="game-header">
+        <span class="game-emoji">▶</span>
+        <span class="game-name-txt">Brookhaven</span>
+        <span class="game-count">1 script</span>
+      </div>
+      <div class="script-item">
+        <div class="script-info">
+          <div class="script-name">Brookhaven Script</div>
+          <div class="script-feat">Speed • Fly • No Clip • Infinite Jump</div>
+        </div>
+        <a href="#" class="get-btn">▶ GET</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 <span>Kalel Scripts</span> — Todos os direitos reservados</p>
+  <p style="margin-top:5px;font-size:0.85em;">Scripts & Executores sempre atualizados 💜</p>
+</footer>
+
+<script>
+function filterAll(q) {
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('#executores .executor-card').forEach(card => {
+    const s = card.getAttribute('data-search') || '';
+    card.style.display = (!q || s.includes(q)) ? 'flex' : 'none';
+  });
+  document.querySelectorAll('#scripts-list .game-section').forEach(sec => {
+    const g = sec.getAttribute('data-game') || '';
+    let match = g.includes(q);
+    sec.querySelectorAll('.script-name').forEach(n => { if(n.textContent.toLowerCase().includes(q)) match=true; });
+    sec.style.display = (!q || match) ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>
