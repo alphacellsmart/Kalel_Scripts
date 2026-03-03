@@ -276,7 +276,8 @@ function updateProgress(){
     const b=document.getElementById('unlock-btn');
     b.classList.remove('locked');
     b.classList.add('unlocked');
-    b.innerHTML='✅ &nbsp;ACESSAR DOWNLOADS';
+    b.innerHTML='✅ &nbsp;LINK DESBLOQUEADO — ACESSAR DOWNLOADS';
+    b.scrollIntoView({behavior:'smooth', block:'center'});
   }
 }
 </script>
