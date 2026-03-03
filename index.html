@@ -126,8 +126,8 @@ body { font-family:'Rajdhani',sans-serif; background:var(--bg); color:var(--whit
 
 .unlock-btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:16px; border:none; border-radius:14px; font-family:'Orbitron',monospace; font-size:0.72em; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; text-decoration:none; margin-top:4px; }
 .unlock-btn.locked { background:rgba(40,20,60,0.6); color:var(--dim); border:1px solid rgba(139,0,255,0.15); pointer-events:none; }
-.unlock-btn.unlocked { background:linear-gradient(135deg,var(--purple2),var(--purple)); color:white; pointer-events:all; animation:unlockglow 2s ease-in-out infinite; }
-@keyframes unlockglow{0%,100%{box-shadow:0 4px 20px rgba(139,0,255,0.4)}50%{box-shadow:0 4px 45px rgba(139,0,255,0.75),0 0 70px rgba(139,0,255,0.2)}}
+.unlock-btn.unlocked { background:linear-gradient(135deg,var(--purple2),var(--purple)) !important; color:white !important; pointer-events:all; opacity:1 !important; animation:unlockglow 2s ease-in-out infinite; }
+@keyframes unlockglow{0%,100%{box-shadow:0 4px 20px rgba(139,0,255,0.4);opacity:1}50%{box-shadow:0 4px 45px rgba(139,0,255,0.75),0 0 70px rgba(139,0,255,0.2);opacity:1}}
 .unlock-btn.unlocked:hover { transform:translateY(-2px); filter:brightness(1.1); }
 
 footer { text-align:center; padding:20px; color:var(--dim); font-size:0.75em; letter-spacing:1px; position:relative; z-index:10; border-top:1px solid var(--border); }
@@ -275,7 +275,10 @@ function updateProgress(){
   if(c===3){
     const b=document.getElementById('unlock-btn');
     b.classList.remove('locked');
+    b.classList.remove('au');
     b.classList.add('unlocked');
+    b.style.opacity='1';
+    b.style.animationName='unlockglow';
     b.innerHTML='✅ &nbsp;LINK DESBLOQUEADO — ACESSAR DOWNLOADS';
     b.scrollIntoView({behavior:'smooth', block:'center'});
   }
