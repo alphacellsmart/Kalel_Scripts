@@ -303,16 +303,32 @@ function enterSite() {
 
 let done={t1:false,t2:false,t3:false};
 
-function completeTask(id){
-  // Marca imediatamente ao clicar, sem depender de retorno do link
-  if(!done[id]){
-    done[id]=true;
-    const el = document.getElementById(id);
-    el.classList.add('done');
-    el.querySelector('.task-arr').innerHTML='✓';
-    updateProgress();
+// ▼▼▼ TROQUE O LINK DO ÚLTIMO VÍDEO AQUI ▼▼▼
+const ULTIMO_VIDEO = 'https://youtube.com/@kalel-scripts';
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+
+document.getElementById('t2').href = ULTIMO_VIDEO;
+document.getElementById('t2-hint').textContent = 'Curta e comente o último vídeo!';
+
+// Registra clique nas tasks usando mousedown/touchstart
+// para garantir que executa ANTES do navegador abrir o link
+['t1','t2','t3'].forEach(function(id){
+  const el = document.getElementById(id);
+
+  function marcar(){
+    if(!done[id]){
+      done[id]=true;
+      el.classList.add('done');
+      el.querySelector('.task-arr').innerHTML='✓';
+      updateProgress();
+    }
   }
-}
+
+  el.addEventListener('mousedown', marcar);
+  el.addEventListener('touchstart', marcar, {passive:true});
+});
+
+function completeTask(id){} // mantido para não dar erro
 
 function updateProgress(){
   const c=Object.values(done).filter(Boolean).length;
