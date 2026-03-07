@@ -264,14 +264,25 @@ function enterSite() {
   fetch(PROXY)
     .then(r => r.json())
     .then(data => {
-      const parser  = new DOMParser();
-      const xml     = parser.parseFromString(data.contents, 'text/xml');
-      const entry   = xml.querySelector('entry');
-      if (!entry) return;
+      const parser = new DOMParser();
+      const xml    = parser.parseFromString(data.contents, 'text/xml');
 
-      const videoId = entry.querySelector('videoId')?.textContent
-                   || entry.querySelector('id')?.textContent?.split(':').pop();
-      const title   = entry.querySelector('title')?.textContent || 'Último vídeo';
+      // O RSS do YouTube usa namespace yt:videoId
+      const entries = xml.querySelectorAll('entry');
+      if (!entries.length) return;
+
+      const entry = entries[0]; // primeiro = mais recente
+
+      // Tenta pegar o videoId pelo namespace ou pelo campo id
+      let videoId = null;
+      const idEl = entry.querySelector('id');
+      if (idEl) {
+        // formato: yt:video:VIDEO_ID
+        const parts = idEl.textContent.split(':');
+        videoId = parts[parts.length - 1];
+      }
+
+      const title = entry.querySelector('title')?.textContent || 'Último vídeo';
 
       if (!videoId) return;
 
@@ -280,25 +291,27 @@ function enterSite() {
       // Atualiza link e hint do botão t2
       const t2 = document.getElementById('t2');
       t2.href = videoUrl;
+      t2.setAttribute('data-video-url', videoUrl);
       document.getElementById('t2-hint').textContent = '▶ ' + title;
     })
     .catch(() => {
-      // fallback silencioso — mantém link do canal
       document.getElementById('t2-hint').textContent = 'Curta e comente o último vídeo!';
     });
 })();
 
 
 
+let done={t1:false,t2:false,t3:false};
+
 function completeTask(id){
-  setTimeout(()=>{
-    if(!done[id]){
-      done[id]=true;
-      document.getElementById(id).classList.add('done');
-      document.querySelector('#'+id+' .task-arr').innerHTML='✓';
-      updateProgress();
-    }
-  },1500);
+  // Marca imediatamente ao clicar, sem depender de retorno do link
+  if(!done[id]){
+    done[id]=true;
+    const el = document.getElementById(id);
+    el.classList.add('done');
+    el.querySelector('.task-arr').innerHTML='✓';
+    updateProgress();
+  }
 }
 
 function updateProgress(){
