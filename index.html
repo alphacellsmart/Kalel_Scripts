@@ -255,6 +255,9 @@ function enterSite() {
   }, 750);
 }
 
+let done={t1:false,t2:false,t3:false};
+let videoTitle = 'Kalel Scripts'; // título do vídeo para pesquisa
+
 // ── RSS YouTube: busca último vídeo automaticamente ──
 (function(){
   const CHANNEL_ID = 'UCX2N85bLl1JwWsb9wQ1NxHg';
@@ -266,32 +269,26 @@ function enterSite() {
     .then(data => {
       const parser = new DOMParser();
       const xml    = parser.parseFromString(data.contents, 'text/xml');
-
-      // O RSS do YouTube usa namespace yt:videoId
       const entries = xml.querySelectorAll('entry');
       if (!entries.length) return;
 
-      const entry = entries[0]; // primeiro = mais recente
-
-      // Tenta pegar o videoId pelo namespace ou pelo campo id
+      const entry = entries[0];
       let videoId = null;
       const idEl = entry.querySelector('id');
       if (idEl) {
-        // formato: yt:video:VIDEO_ID
         const parts = idEl.textContent.split(':');
         videoId = parts[parts.length - 1];
       }
 
-      const title = entry.querySelector('title')?.textContent || 'Último vídeo';
+      const title = entry.querySelector('title')?.textContent || 'Kalel Scripts';
+      videoTitle = title;
 
       if (!videoId) return;
 
-      const videoUrl = 'https://www.youtube.com/watch?v=' + videoId;
-
-      // Atualiza link e hint do botão t2
+      // Abre como pesquisa no YouTube — ajuda no algoritmo
+      const searchUrl = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(title);
       const t2 = document.getElementById('t2');
-      t2.href = videoUrl;
-      t2.setAttribute('data-video-url', videoUrl);
+      t2.href = searchUrl;
       document.getElementById('t2-hint').textContent = '▶ ' + title;
     })
     .catch(() => {
@@ -299,33 +296,20 @@ function enterSite() {
     });
 })();
 
-
-
-let done={t1:false,t2:false,t3:false};
-
-// ▼▼▼ TROQUE O LINK DO ÚLTIMO VÍDEO AQUI ▼▼▼
-const ULTIMO_VIDEO = 'https://youtube.com/@kalel-scripts';
-// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-
-document.getElementById('t2').href = ULTIMO_VIDEO;
-document.getElementById('t2-hint').textContent = 'Curta e comente o último vídeo!';
-
-// Registra clique nas tasks usando mousedown/touchstart
-// para garantir que executa ANTES do navegador abrir o link
+// Missões — só conclui com clique real (não scroll)
 ['t1','t2','t3'].forEach(function(id){
   const el = document.getElementById(id);
 
-  function marcar(){
-    if(!done[id]){
-      done[id]=true;
-      el.classList.add('done');
-      el.querySelector('.task-arr').innerHTML='✓';
-      updateProgress();
-    }
-  }
-
-  el.addEventListener('mousedown', marcar);
-  el.addEventListener('touchstart', marcar, {passive:true});
+  el.addEventListener('click', function(){
+    setTimeout(function(){
+      if(!done[id]){
+        done[id]=true;
+        el.classList.add('done');
+        el.querySelector('.task-arr').innerHTML='✓';
+        updateProgress();
+      }
+    }, 300);
+  });
 });
 
 function completeTask(id){} // mantido para não dar erro
