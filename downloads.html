@@ -165,7 +165,73 @@ footer span { color:var(--purple); }
 .d4{animation-delay:0.2s}.d5{animation-delay:0.25s}.d6{animation-delay:0.3s}
 .d7{animation-delay:0.35s}.d8{animation-delay:0.4s}
 
-/* BIG TITLES */
+/* BOTÃO TOPO */
+.top-canal-btn {
+  display:block; width:100%; text-align:center;
+  padding:14px 20px; margin-top:12px;
+  background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));
+  border:1px solid rgba(201,168,76,0.6);
+  border-radius:14px;
+  font-family:'Orbitron',monospace;
+  font-size:0.75em; font-weight:900;
+  letter-spacing:3px; text-transform:uppercase;
+  text-decoration:none;
+  background-clip:text;
+  color:var(--gold);
+  box-shadow:0 0 20px rgba(201,168,76,0.15);
+  transition:all 0.3s;
+  animation:top-btn-glow 2.5s ease-in-out infinite;
+}
+@keyframes top-btn-glow {
+  0%,100%{box-shadow:0 0 10px rgba(201,168,76,0.15); border-color:rgba(201,168,76,0.4)}
+  50%{box-shadow:0 0 25px rgba(201,168,76,0.4); border-color:rgba(201,168,76,0.9)}
+}
+.top-canal-btn:hover {
+  background:linear-gradient(135deg,rgba(201,168,76,0.25),rgba(201,168,76,0.1));
+  transform:translateY(-2px);
+}
+
+/* BANNER CANAL */
+.canal-banner {
+  display:flex; align-items:center; gap:0;
+  width:100%; border-radius:14px; overflow:hidden;
+  text-decoration:none; margin:14px 0;
+  border:1px solid rgba(201,168,76,0.5);
+  box-shadow:0 0 25px rgba(201,168,76,0.2);
+  transition:all 0.3s;
+  animation:canal-glow 3s ease-in-out infinite;
+}
+@keyframes canal-glow {
+  0%,100%{box-shadow:0 0 15px rgba(201,168,76,0.2)}
+  50%{box-shadow:0 0 35px rgba(201,168,76,0.45)}
+}
+.canal-banner:hover { transform:translateY(-2px); filter:brightness(1.08); }
+.canal-left {
+  background:linear-gradient(135deg,rgba(201,168,76,0.25),rgba(201,168,76,0.1));
+  padding:16px 18px;
+  display:flex; align-items:center; justify-content:center;
+}
+.canal-crown { font-size:1.6em; }
+.canal-center {
+  flex:1; padding:14px 12px;
+  background:linear-gradient(135deg,rgba(20,10,35,0.97),rgba(15,5,25,0.98));
+}
+.canal-title {
+  font-family:'Orbitron',monospace;
+  font-size:0.72em; font-weight:900;
+  letter-spacing:2px; text-transform:uppercase;
+  background:linear-gradient(135deg,var(--gold),#fff,var(--gold));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.canal-sub { font-size:0.7em; color:rgba(201,168,76,0.7); margin-top:4px; }
+.canal-arrow {
+  background:linear-gradient(135deg,rgba(201,168,76,0.8),var(--gold));
+  padding:0 16px; min-height:60px;
+  display:flex; align-items:center; justify-content:center;
+  color:#07040f; font-size:1.2em; font-weight:900;
+}
+
+
 .big-title {
   display:flex; align-items:center; gap:14px;
   margin:8px 0 16px;
@@ -195,6 +261,11 @@ footer span { color:var(--purple); }
 
 <div class="content">
 
+  <!-- BOTÃO TOPO -->
+  <a href="https://snet.blog/88xqao6" target="_blank" class="top-canal-btn au d1">
+    👑 MELHOR CANAL DE SCRIPTS
+  </a>
+
   <!-- HEADER -->
   <div class="header">
     <a href="index.html" class="back-btn au d1">← Voltar</a>
@@ -213,6 +284,18 @@ footer span { color:var(--purple); }
     <span class="search-ico">🔍</span>
     <input type="text" class="search-box" id="searchBox" placeholder="Pesquise por jogo ou script..." oninput="filterAll(this.value)">
   </div>
+
+  <!-- BANNER CANAL -->
+  <a href="https://snet.blog/88xqao6" target="_blank" class="canal-banner au d3">
+    <div class="canal-left">
+      <span class="canal-crown">👑</span>
+    </div>
+    <div class="canal-center">
+      <div class="canal-title">MELHOR CANAL DE SCRIPTS</div>
+      <div class="canal-sub">Scripts exclusivos todo dia • Acesse agora!</div>
+    </div>
+    <div class="canal-arrow">→</div>
+  </a>
 
   <!-- ===== EXECUTORES ===== -->
   <div class="divider au d4"><div class="div-line"></div><div class="div-gem"></div><div class="div-line"></div></div>
@@ -374,46 +457,9 @@ footer span { color:var(--purple); }
         </div>
         <a href="https://encurtaprime.com.br/P8JIws" class="get-btn" target="_blank">▶ GET</a>
       </div>
-      <div class="script-item">
-        <div class="script-info">
-          <div class="script-name">TBO HUB</div>
-          <div class="script-feat">Auto Farm • Kill Aura • ESP • Speed</div>
-        </div>
-        <a href="https://encurtaprime.com.br/3jbWn1" class="get-btn" target="_blank">▶ GET</a>
-      </div>
     </div>
 
-    <!-- Lab Brainrot -->
-    <div class="game-section au d5" data-game="Lab Brainrot">
-      <div class="game-header">
-        <span class="game-emoji">▶</span>
-        <span class="game-name-txt">Lab Brainrot</span>
-        <span class="game-count">1 scripts</span>
-      </div>
-      <div class="script-item">
-        <div class="script-info">
-          <div class="script-name">WaveM Hub</div>
-          <div class="script-feat">Auto Farm • Teleport • ESP • Raid Auto</div>
-        </div>
-        <a href="https://encurtaprime.com.br/Paazdu" class="get-btn" target="_blank">▶ GET</a>
-      </div>
-      
-      <!-- Sailor Peace-->
-    <div class="game-section au d5" data-game="Sailor Peace">
-      <div class="game-header">
-        <span class="game-emoji">▶</span>
-        <span class="game-name-txt">Sailor Peace</span>
-        <span class="game-count">1 scripts</span>
-      </div>
-      <div class="script-item">
-        <div class="script-info">
-          <div class="script-name">Express Hub</div>
-          <div class="script-feat">Speed • Fly • No Clip • Infinite Jump</div>
-        </div>
-        <a href="https://encurtaprime.com.br/AzU4Ci" class="get-btn" target="_blank">▶ GET</a>
-      </div>
-      
-      <!-- BROOKHAVEN -->
+    <!-- BROOKHAVEN -->
     <div class="game-section au d7" data-game="brookhaven">
       <div class="game-header">
         <span class="game-emoji">▶</span>
