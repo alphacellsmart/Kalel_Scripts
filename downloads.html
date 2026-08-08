@@ -180,7 +180,7 @@ footer span { color:var(--purple); }
   color:var(--gold);
   box-shadow:0 0 20px rgba(201,168,76,0.15);
   transition:all 0.3s;
-  animation:top-btn-glow 2.5s ease-in-out infinite;
+  animation:fadeUp 0.5s ease forwards, top-btn-glow 2.5s ease-in-out infinite;
 }
 @keyframes top-btn-glow {
   0%,100%{box-shadow:0 0 10px rgba(201,168,76,0.15); border-color:rgba(201,168,76,0.4)}
@@ -191,6 +191,23 @@ footer span { color:var(--purple); }
   transform:translateY(-2px);
 }
 
+/* PREMIUM SCRIPTS BADGE */
+.premium-badge {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  text-align:center; text-decoration:none;
+  padding:12px 18px; margin:4px 0 14px;
+  font-family:'Orbitron',monospace;
+  font-size:0.95em; font-weight:900;
+  letter-spacing:2px; text-transform:uppercase;
+  color:var(--gold);
+  text-shadow:0 0 12px rgba(201,168,76,0.8), 0 0 24px rgba(201,168,76,0.4);
+  animation:fadeUp 0.5s ease forwards, premium-pulse 2s ease-in-out infinite;
+}
+@keyframes premium-pulse {
+  0%,100%{ text-shadow:0 0 8px rgba(201,168,76,0.6), 0 0 16px rgba(201,168,76,0.3); }
+  50%{ text-shadow:0 0 16px rgba(201,168,76,1), 0 0 32px rgba(201,168,76,0.6); }
+}
+
 /* BANNER CANAL */
 .canal-banner {
   display:flex; align-items:center; gap:0;
@@ -199,7 +216,7 @@ footer span { color:var(--purple); }
   border:1px solid rgba(201,168,76,0.5);
   box-shadow:0 0 25px rgba(201,168,76,0.2);
   transition:all 0.3s;
-  animation:canal-glow 3s ease-in-out infinite;
+  animation:fadeUp 0.5s ease forwards, canal-glow 3s ease-in-out infinite;
 }
 @keyframes canal-glow {
   0%,100%{box-shadow:0 0 15px rgba(201,168,76,0.2)}
@@ -299,6 +316,11 @@ footer span { color:var(--purple); }
 
   <!-- ===== EXECUTORES ===== -->
   <div class="divider au d4"><div class="div-line"></div><div class="div-gem"></div><div class="div-line"></div></div>
+
+  <a href="https://snet.blog/88xqao6" target="_blank" class="premium-badge au d4">
+    <span class="premium-star">⭐</span> Scripts Premium <span class="premium-star">⭐</span>
+  </a>
+
   <div class="big-title au d4">
   <span class="big-title-line"></span>
   <h2 class="big-title-txt">EXECUTORES</h2>
